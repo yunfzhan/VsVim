@@ -67,7 +67,7 @@ function test-vsixcontents() {
 
     $foundFiles = gci $target | %{ $_.Name }
     if ($foundFiles.Count -ne $expectedFiles.Count) { 
-        write-host "Found $($foundFiles.Count) but expected $(expectedFiles.Count)"
+        write-host "Found $($foundFiles.Count) but expected $($expectedFiles.Count)"
         write-host "Wrong number of foundFiles in VSIX." 
         write-host "Extra foundFiles"
         foreach ($file in $foundFiles) {
@@ -84,7 +84,6 @@ function test-vsixcontents() {
         }
 
         write-host "Location: $target"
-        write-error "Found $($foundFiles.Count) but expected $expected"
     }
 
     foreach ($item in $expectedFiles) {
@@ -266,6 +265,7 @@ try {
 }
 catch {
     write-host "Error: $($_.Exception.Message)"
+    write-host $_.ScriptStackTrace
     exit 1
 }
 finally {
